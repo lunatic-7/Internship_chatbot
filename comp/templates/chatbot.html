@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Comprehension Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-200">
+    <div class="max-w-4xl mx-auto my-10 p-4 rounded-lg shadow-md bg-white">
+        <!-- <h1 class="text-2xl font-bold mb-4 font-mono">Comprehension Analyzer</h1> -->
+        <div class="mb-4">
+            <p class="font-bold">Input:</p>
+            <pre class="bg-gray-100 rounded-lg p-2 whitespace-pre-wrap">{{ input|truncatechars:500 }}</pre>
+        </div>
+        <div class="mb-4">
+            <p class="font-bold">Output:</p>
+            <pre class="bg-gray-100 rounded-lg p-2 whitespace-pre-wrap">{{ output|safe }}</pre>
+        </div>
+        {% if output %}
+        <form method="POST" class="flex items-center justify-between">
+            {% csrf_token %}
+            <input type="hidden" name="comprehension" value="{{ input}}">
+            <div>
+                <input type="submit" name="toc" value="Table of Contents"
+                    class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded mr-4">
+
+                <input type="submit" name="summary" value="Summary"
+                    class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded mr-1">
+                <select id="sum_l" name="sum_l" class="border border-gray-400 rounded px-2 py-1 mr-4 cursor-pointer">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="300">300</option>
+                </select>
+                
+                
+                <input type="submit" name="questions" value="Questions"
+                    class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded mr-1">
+                <select id="num-questions" name="num-questions"
+                    class="border border-gray-400 rounded px-2 py-1 mr-2 cursor-pointer">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+
+            <div>
+                <input type="submit" name="exit" value="Exit"
+                    class="bg-red-500 hover:bg-red-700 text-white font-semibold py-1.5 px-3 rounded cursor-pointer">
+                </div>
+        </form>
+        {% endif %}
+    </div>
+</body>
+
+</html>

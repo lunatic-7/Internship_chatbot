@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Comprehension Analyzer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+    <div class="max-w-4xl mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-6 font-serif">Comprehension Analyzer</h1>
+        <form method="POST" class="bg-white shadow-md rounded-lg p-6">
+            {% csrf_token %}
+
+            <label for="comprehension" class="block mb-2 font-bold">Enter your comprehension:</label>
+            <textarea id="comprehension" name="comprehension" rows="20" cols="50"
+                class="w-full border-gray-300 rounded-lg px-3 py-2 mb-4 outline outline-2 outline-gray-400 focus:outline-gray-700 focus:shadow-outline"></textarea>
+            <div class="flex justify-end">
+                <input type="submit" name="toc" value="Table of Contents"
+                    class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded mr-4">
+
+                <input type="submit" name="summary" value="Summary"
+                    class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded mr-1">
+                <select id="sum_l" name="sum_l" class="border border-gray-400 rounded px-2 py-1 mr-4 cursor-pointer">
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                    <option value="200">200</option>
+                    <option value="300">300</option>
+                </select>
+
+
+                <input type="submit" name="questions" value="Questions"
+                    class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded mr-1">
+                <select id="num-questions" name="num-questions" class="border border-gray-400 rounded px-2 py-1 cursor-pointer">
+                    <option value="5">5</option>
+                    <option value="10">10</option>
+                    <option value="15">15</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
