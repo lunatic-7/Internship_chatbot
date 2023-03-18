@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot UI</title>
+    <!-- Import Tailwind CSS stylesheet -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/258973f2c5.js" crossorigin="anonymous"></script>
+</head>
+
+<body class="bg-gradient-to-br from-indigo-300 to-green-300">
+    <div class="container mx-auto max-w-4xl p-4">
+        <!-- Header section -->
+        <div
+            class="bg-gradient-to-br from-indigo-200 to-green-100 px-4 py-3 flex justify-between items-center rounded-t-xl">
+            <h3 class="text-lg font-bold text-gray-800 font-mono">Comprehension Analyzer</h3>
+            <div class="flex items-center space-x-4">
+                <button class="p-2">
+                    <i class="fas fa-share text-gray-600 hover:text-gray-900"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-copy text-gray-600 hover:text-gray-900"></i>
+                </button>
+                <button class="p-2">
+                    <i class="fas fa-times text-red-400 hover:text-red-700"></i>
+                </button>
+            </div>
+        </div>
+        <div class="bg-gray-100 p-4">
+            <div class="chat-history h-[77vh] overflow-y-auto">
+                <!-- Chat messages will be displayed here -->
+            </div>
+            <div class="relative input-field">
+                <input type="text" name="message"
+                    class="bg-white rounded-full border border-gray-300 focus:outline-none focus:ring focus:ring-indigo-100 py-2 pr-4 pl-10 block w-full appearance-none leading-normal"
+                    placeholder="Type your message...">
+                <div class="absolute inset-y-0 right-0 flex items-center">
+                    <button type="submit"
+                        class="bg-indigo-500 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline hover:bg-indigo-600">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="absolute inset-y-0 left-0 flex items-center pl-4">
+                    <i class="fas fa-comment-dots text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Get references to the chat history container, input field, and send button
+        const chatHistory = document.querySelector('.chat-history');
+        const inputField = document.querySelector('.input-field input');
+        const sendButton = document.querySelector('.input-field button');
+
+        // Event listener for the send button
+        sendButton.addEventListener('click', sendMessage);
+
+        // Event listener for the Enter key on the input field
+        inputField.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        // Function to send a message
+        function sendMessage() {
+            // Get the user's message from the input field
+            const message = inputField.value;
+
+            // Clear the input field
+            inputField.value = '';
+
+            // Add the user's message to the chat history container
+            const userMessage = `
+            <div class="flex items-center justify-end mt-2">
+              <div class="rounded-3xl bg-indigo-500 text-white py-2 px-4 mr-2">${message}</div>
+              <div class="text-gray-400 text-sm font-semibold">${new Date().toLocaleTimeString()}</div>
+            </div>
+          `;
+            chatHistory.insertAdjacentHTML('beforeend', userMessage);
+
+            //   Call the function to process the user's message and generate a response
+            const botMessage = processUserMessage(message);
+
+            // Add the bot's message to the chat history container after a short delay
+            setTimeout(() => {
+                const botResponse = `
+              <div class="flex items-center mt-2">
+                <div class="rounded-3xl bg-gray-200 text-gray-900 py-2 px-4 ml-2 mr-2">${botMessage}</div>
+                <div class="text-gray-400 text-sm font-semibold">${new Date().toLocaleTimeString()}</div>
+              </div>
+            `;
+                chatHistory.insertAdjacentHTML('beforeend', botResponse);
+            }, 1000);
+        }
+        
+        // Function to process the user's message and generate a response
+        function processUserMessage(message) {
+            // Placeholder code - replace with your own logic to generate a response
+            return `<div class="text-gray-700 p-1">
+        <p class="my-2 mb-3">Welcome! How can I assist you?</p>
+        <div class="flex justify-center space-x-4">
+          <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">Summarize</button>
+          <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">Table of Contents</button>
+          <button class="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline">Q & A</button>
+        </div>
+      </div>`;
+        }
+    </script>
+</body>
+
+</html>

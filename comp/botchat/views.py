@@ -19,3 +19,6 @@ def chatbot(request):
         return render(request, 'chatbot.html', {'output': output, 'input': comprehension})
     else:
         return render(request, 'index.html')
+
+def chatui(request):
+    return render(request, 'chatui.html')

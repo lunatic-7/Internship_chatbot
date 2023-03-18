@@ -1,6 +1,6 @@
 import openai
 
-openai.api_key = "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"
+openai.api_key = "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"
 
 def generate_summary(comprehension, sum_l):
     model_engine = "text-davinci-003"

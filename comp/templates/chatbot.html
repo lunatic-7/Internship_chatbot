@@ -20,7 +20,7 @@
         {% if output %}
         <form method="POST" class="flex items-center justify-between">
             {% csrf_token %}
-            <input type="hidden" name="comprehension" value="{{ input}}">
+            <input type="hidden" name="comprehension" value="{{ input }}">
             <div>
                 <input type="submit" name="toc" value="Table of Contents"
                     class="cursor-pointer bg-gray-600 hover:bg-gray-700 text-white font-semibold py-1.5 px-3 rounded mr-4">
